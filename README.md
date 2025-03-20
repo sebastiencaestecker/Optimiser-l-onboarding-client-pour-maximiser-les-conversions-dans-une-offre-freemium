@@ -1,71 +1,45 @@
-# 🍽️ Foodie-Fi SQL Analysis
+# Analyse des Abonnements Foodie-Fi
 
-## 📌 Présentation du projet  
-Analyse les données de **Foodie-Fi**, un service de streaming culinaire par abonnement. L'objectif est d'examiner le parcours d'onboarding des clients, l'évolution des abonnements, l'impact des annulations et l'analyse des paiements en utilisant **SQL**.
+## 📖 Description du Projet
+Ce projet explore les données d'abonnement du service **Foodie-Fi** en analysant les parcours d'onboarding des clients, la distribution des abonnements et les tendances d'annulation. 📊📈
 
----
+## 📂 Contenu du Projet
+Le projet est structuré autour de plusieurs requêtes **SQL** permettant d'extraire des insights sur les abonnements et les comportements des utilisateurs. 🔍
 
-## 📊 Catégories d’analyse
+### 🚀 A. Description du parcours d'onboarding
+Un ensemble de requêtes SQL permet de reconstituer le **parcours d'onboarding** de chaque client en classant leurs abonnements par ordre chronologique et en regroupant les différentes étapes sous forme de tableau. 📅
 
-### 📍 A. Description du parcours d'onboarding  
-L’objectif est d’analyser les étapes par lesquelles passent les clients lors de leur inscription :  
-- 🔹 **Classement des abonnements pour chaque client** avec **RANK()**  
-- 🔹 **Détermination des principales étapes du parcours**  
-- 🔹 **Nombre de clients ayant suivi un parcours spécifique**  
+### 🧐 B. Questions d'analyse de données
+Ce projet répond à plusieurs questions clés :
 
-📌 *Permet d'identifier les tendances d'inscription et d'améliorer l'expérience utilisateur.*
+1. **📌 Nombre total de clients**
+   - 🔢 Requête SQL pour compter le nombre total d'abonnés uniques.
 
----
+2. **📊 Distribution mensuelle des essais gratuits**
+   - 📆 Requête SQL pour afficher la répartition mensuelle des abonnements d'essai.
 
-### 📈 B. Analyse des données clients  
-Cette section explore les tendances des abonnements et les comportements des clients :  
-1️⃣ **Nombre total de clients**  
-2️⃣ **Distribution mensuelle des abonnements d’essai**  
-3️⃣ **Nombre d’abonnements commencés après 2020**  
-4️⃣ **Taux d’annulation des abonnements**  
-5️⃣ **Annulations après l’essai gratuit**  
-6️⃣ **Taux de conversion après essai gratuit**  
-7️⃣ **Répartition des plans au 31 décembre 2020**  
-8️⃣ **Nombre de clients ayant choisi un plan annuel**  
-9️⃣ **Délai moyen avant passage à un plan annuel**  
-🔟 **Décomposition de ce délai en périodes de 30 jours**  
-1️⃣1️⃣ **Nombre de rétrogradations d’un plan Pro à un plan Basique**  
+3. **📅 Répartition des abonnements après 2020**
+   - 🔎 Requête SQL pour identifier les abonnements souscrits après l'année 2020 et leur répartition par type.
 
-📌 *Ces analyses permettent d’évaluer le succès du modèle d’abonnement et d’identifier les opportunités d’amélioration.*
+4. **🚨 Taux d'annulation des abonnements**
+   - ❌ Requête SQL pour calculer le nombre et le pourcentage de clients ayant annulé leur abonnement.
 
----
+5. **📉 Annulations après l'essai gratuit**
+   - ❗ Requête SQL pour identifier les clients ayant annulé immédiatement après leur essai gratuit.
 
-### 💳 C. Analyse des paiements  
-L’objectif est de **simuler une table des paiements** pour 2020 en respectant les règles de facturation :  
-- 📆 **Paiements mensuels à la même date que l’inscription**  
-- 🔄 **Ajustement en cas de mise à niveau d’un plan**  
-- 🏁 **Fin de facturation après annulation de l’abonnement**  
+6. **📈 Souscriptions après l'essai gratuit**
+   - ✅ Requête SQL pour calculer le nombre et le pourcentage de clients ayant souscrit à un abonnement après leur période d'essai.
 
-📌 *Permet d’avoir une vision claire des revenus et d’optimiser la gestion des abonnements.*
+7. **📆 Répartition des abonnements au 31 décembre 2020**
+   - 📜 Requête SQL pour afficher la répartition des clients selon leur dernier abonnement à cette date.
 
----
+## 🛠️ Technologies Utilisées
+- **SQL server** : Langage principal utilisé pour interroger la base de données. 🗄️
 
-### 💡 D. Questions ouvertes  
-Cette section explore des axes d’analyse plus stratégiques :  
-🔹 **Taux de croissance de Foodie-Fi**  
-🔹 **Indicateurs clés pour mesurer la performance**  
-🔹 **Expériences client à analyser pour améliorer la fidélisation**  
-🔹 **Questions à inclure dans un sondage de sortie**  
-🔹 **Stratégies pour réduire le churn (taux de désabonnement)**  
+## ▶️ Exécution des Requêtes
+Les requêtes SQL peuvent être exécutées sur n'importe quelle base de données contenant les tables suivantes :
+- **`subscriptions`** : Contient les abonnements des clients avec `customer_id`, `plan_id` et `start_date`. 📜
+- **`plans`** : Contient les différents types d'abonnements avec `plan_id` et `plan_name`. 📑
 
-📌 *Ces réflexions permettent d’aborder l’analyse sous un angle business et stratégique.*
 
----
 
-## 🛠️ Technologies et outils utilisés  
-- **SQL (SQL Server)** : Requêtes analytiques et transformations de données  
-
-## 🎯 Améliorations possibles  
-- 🔹 **Prédiction du churn** avec des modèles de Machine Learning  
-- 🔹 **Segmentation des clients** en fonction de leur parcours d’abonnement  
-- 🔹 **Optimisation des prix et promotions** pour maximiser la conversion  
-- 🔹 **Visualisation dynamique des abonnements et des paiements**  
-
----
-
-examiner le parcours d'onboarding des clients, l'évolution des abonnements, l'impact des annulations et l'analyse des paiements en utilisant SQL
