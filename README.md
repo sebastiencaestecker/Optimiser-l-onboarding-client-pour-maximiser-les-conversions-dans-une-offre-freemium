@@ -7,7 +7,10 @@ Ce projet explore les données d'abonnement du service **Foodie-Fi** en analysan
 Le projet est structuré autour de plusieurs requêtes **SQL** permettant d'extraire des insights sur les abonnements et les comportements des utilisateurs. 🔍
 
 ### 🚀 A. Description du parcours d'onboarding
-Un ensemble de requêtes SQL permet de reconstituer le **parcours d'onboarding** de chaque client en classant leurs abonnements par ordre chronologique et en regroupant les différentes étapes sous forme de tableau. 📅
+L'onboarding des clients est analysé en identifiant les différentes étapes d'abonnement qu'ils suivent. Une requête SQL utilise **RANK() OVER(PARTITION BY customer_id ORDER BY start_date)** pour attribuer un rang à chaque abonnement et regrouper les étapes sous forme de tableau. 📅
+
+- **Utilisation de `WITH` (Common Table Expressions - CTE)** pour structurer les étapes en sous-ensembles (`rank1`, `rank2`, etc.).
+- **Jointures entre les étapes** pour analyser le parcours complet des clients.
 
 ### 🧐 B. Questions d'analyse de données
 Ce projet répond à plusieurs questions clés :
@@ -28,7 +31,7 @@ Ce projet répond à plusieurs questions clés :
    - ❗ Utilisation de `RANK() OVER (PARTITION BY customer_id ORDER BY start_date)` pour déterminer les clients ayant annulé après un essai gratuit, avec une **jointure sur les plans**.
 
 6. **📈 Souscriptions après l'essai gratuit**
-   - ✅ Approche similaire à la précédente, en filtrant sur les abonnements actifs après un essai gratuit.
+   - ✅ Utilisation de `CASE WHEN` dans un `COUNT(DISTINCT customer_id)` pour calculer les clients ayant souscrit après leur essai gratuit.
 
 7. **📆 Répartition des abonnements au 31 décembre 2020**
    - 📜 Utilisation de `ROW_NUMBER() OVER (PARTITION BY customer_id ORDER BY start_date DESC)` pour identifier l'abonnement actif à la date de référence et afficher sa distribution.
@@ -44,6 +47,5 @@ Les requêtes SQL utilisées varient en complexité :
 Les requêtes SQL peuvent être exécutées sur n'importe quelle base de données contenant les tables suivantes :
 - **`subscriptions`** : Contient les abonnements des clients avec `customer_id`, `plan_id` et `start_date`. 📜
 - **`plans`** : Contient les différents types d'abonnements avec `plan_id` et `plan_name`. 📑
-
 
 
