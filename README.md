@@ -1,6 +1,5 @@
 # Optimisation de l'onboarding et de la rétention client dans un modèle freemium SaaS – Cas Foodie-Fi - SQL
 
----
 
 ##  Objectif métier
 
