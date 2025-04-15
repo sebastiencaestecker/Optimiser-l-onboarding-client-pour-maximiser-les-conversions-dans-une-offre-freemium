@@ -205,27 +205,3 @@ where rn=1 and plan_name !='churn'
 
 
 
--- 8. Combien de clients sont passés à un plan annuel en 2020 ?
--- 9. Combien de jours en moyenne faut-il à un client pour passer à un plan annuel depuis le jour où il rejoint Foodie-Fi ?
--- 10. Pouvez-vous décomposer cette valeur moyenne en périodes de 30 jours (par exemple : 0-30 jours, 31-60 jours, etc.) ?
--- 11. Combien de clients ont rétrogradé d'un plan pro mensuel à un plan de base mensuel en 2020 ?
-
--- C. Question sur les paiements
--- L'équipe de Foodie-Fi souhaite que vous créiez une nouvelle table des paiements pour l'année 2020, incluant les montants payés par chaque client dans la table des abonnements avec les exigences suivantes :
--- - Les paiements mensuels ont lieu toujours à la même date du mois que la date de début de tout plan mensuel payé.
--- - Les mises à niveau d'un plan de base vers un plan mensuel ou pro sont ajustées par le montant déjà payé ce mois-là et commencent immédiatement.
--- - Les mises à niveau d'un plan pro mensuel vers un plan pro annuel sont payées à la fin de la période de facturation actuelle et commencent à la fin du mois.
--- - Une fois qu'un client annule son abonnement, il ne fera plus de paiements.
--- Exemple de sortie pour cette table :
--- customer_id | plan_id | plan_name | payment_date | amount | payment_order
-
--- D. Questions ouvertes
--- Les questions suivantes sont ouvertes et pourraient être posées lors d’un entretien technique pour cette étude de cas. Il n'y a pas de bonnes ou mauvaises réponses, mais des réponses qui font sens tant d'un point de vue technique que commercial laisseront une impression positive !
--- 1. Comment calculeriez-vous le taux de croissance de Foodie-Fi ?
--- 2. Quels sont les indicateurs clés que vous recommanderiez à la direction de Foodie-Fi pour suivre la performance de leur entreprise au fil du temps ?
--- 3. Quels sont les principaux parcours ou expériences clients que vous analyseriez davantage pour améliorer la fidélisation des clients ?
--- 4. Si l’équipe de Foodie-Fi devait créer un sondage de sortie pour les clients qui souhaitent annuler leur abonnement, quelles questions incluriez-vous dans ce sondage ?
--- 5. Quels leviers commerciaux l’équipe de Foodie-Fi pourrait-elle utiliser pour réduire le taux de désabonnement ? Comment valideriez-vous l'efficacité de vos idées ?
-
--- Conclusion
--- Cette étude de cas devrait refléter des questions réalistes que nous abordons habituellement dans toutes les demandes d’analyse produit dans une grande variété d'industries, surtout dans le domaine numérique !
