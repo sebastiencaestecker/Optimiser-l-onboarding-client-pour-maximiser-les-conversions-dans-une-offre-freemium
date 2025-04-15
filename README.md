@@ -57,4 +57,64 @@ Ce projet m’a permis de :
 - Penser l'analyse sous l’angle de la **valeur client** et de la **durabilité du modèle économique**.
 - **Comprendre un business model SaaS**, ses enjeux de conversion et de rétention.
 
+## Exemple de requete
 
+ Reconstituer le parcours d’abonnement des clients, étape par étape, pour identifier les combinaisons les plus fréquentes 
+ ``` sql
+WITH rank AS (
+    SELECT
+        s.customer_id,
+        p.plan_name,
+        s.start_date,
+        RANK() OVER(PARTITION BY s.customer_id ORDER BY s.start_date) AS rank
+    FROM plans p
+    JOIN subscriptions s ON p.plan_id = s.plan_id
+),
+rank1 AS (SELECT * FROM rank WHERE rank = 1),
+rank2 AS (SELECT * FROM rank WHERE rank = 2),
+rank3 AS (SELECT * FROM rank WHERE rank = 3),
+rank4 AS (SELECT * FROM rank WHERE rank = 4)
+
+SELECT 
+    r1.plan_name AS etape1,
+    r2.plan_name AS etape2,
+    r3.plan_name AS etape3,
+    r4.plan_name AS etape4,
+    COUNT(r1.customer_id) AS nb_customers
+FROM rank1 r1
+LEFT JOIN rank2 r2 ON r1.customer_id = r2.customer_id
+LEFT JOIN rank3 r3 ON r2.customer_id = r3.customer_id
+LEFT JOIN rank4 r4 ON r3.customer_id = r4.customer_id
+GROUP BY r1.plan_name, r2.plan_name, r3.plan_name, r4.plan_name
+ORDER BY nb_customers DESC;
+```
+ Cette requête calcule le nombre d’abonnements au plan "trial" par mois, en utilisant MONTH() pour extraire le mois de la date de début.
+  ``` sql
+SELECT
+    MONTH(s.start_date) AS months,
+    COUNT(*) AS nb_sub_trial
+FROM subscriptions s
+JOIN plans p ON p.plan_id = s.plan_id
+WHERE p.plan_name = 'trial'
+GROUP BY MONTH(s.start_date);
+
+ ```
+ Pourcentage de clients ayant annulé
+  ``` sql
+WITH nb_churn AS (
+    SELECT COUNT(DISTINCT s.customer_id) AS nb_churns
+    FROM subscriptions s 
+    JOIN plans p ON s.plan_id = p.plan_id
+    WHERE p.plan_name = 'churn'
+),
+total_clients AS (
+    SELECT COUNT(DISTINCT customer_id) AS nb_clients
+    FROM subscriptions
+)
+SELECT
+    tc.nb_clients,
+    cc.nb_churns,
+    ROUND(CAST(cc.nb_churns * 100.0 / tc.nb_clients AS FLOAT), 1) AS percent_cancelled
+FROM total_clients tc
+CROSS JOIN nb_churn cc;
+```
