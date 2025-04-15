@@ -1,51 +1,60 @@
-# 📌 Analyse des Abonnements Foodie-Fi
+# Optimisation de l'onboarding et de la rétention client dans un modèle freemium SaaS – Cas Foodie-Fi
 
-## 📖 Description du Projet
-Ce projet explore les données d'abonnement du service **Foodie-Fi** en analysant les parcours d'onboarding des clients, la distribution des abonnements et les tendances d'annulation. 📊📈
+---
 
-## 📂 Contenu du Projet
-Le projet est structuré autour de plusieurs requêtes **SQL** permettant d'extraire des insights sur les abonnements et les comportements des utilisateurs. 🔍
+##  Objectif métier
 
-### 🚀 A. Description du parcours d'onboarding
-L'onboarding des clients est analysé en identifiant les différentes étapes d'abonnement qu'ils suivent. Une requête SQL utilise **RANK() OVER(PARTITION BY customer_id ORDER BY start_date)** pour attribuer un rang à chaque abonnement et regrouper les étapes sous forme de tableau. 📅
+**Secteur ciblé : SaaS / E-commerce**
 
-- **Utilisation de `WITH` (Common Table Expressions - CTE)** pour structurer les étapes en sous-ensembles (`rank1`, `rank2`, etc.).
-- **Jointures entre les étapes** pour analyser le parcours complet des clients.
-
-### 🧐 B. Questions d'analyse de données
-Ce projet répond à plusieurs questions clés :
-
-1. **📌 Nombre total de clients**
-   - 🔢 Requête SQL simple utilisant `COUNT(DISTINCT customer_id)` pour obtenir le nombre total d'abonnés uniques.
-
-2. **📊 Distribution mensuelle des essais gratuits**
-   - 📆 Utilisation de la fonction `MONTH()` pour regrouper les abonnements d'essai par mois et compter les occurrences.
-
-3. **📅 Répartition des abonnements après 2020**
-   - 🔎 Requête utilisant `YEAR(start_date) > 2020` et `GROUP BY` pour identifier les abonnements souscrits après 2020.
-
-4. **🚨 Taux d'annulation des abonnements**
-   - ❌ Utilisation de **CTE (Common Table Expressions)** pour calculer le nombre total de clients et le nombre d'annulations, puis calcul du pourcentage avec `ROUND()`.
-
-5. **📉 Annulations après l'essai gratuit**
-   - ❗ Utilisation de `RANK() OVER (PARTITION BY customer_id ORDER BY start_date)` pour déterminer les clients ayant annulé après un essai gratuit, avec une **jointure sur les plans**.
-
-6. **📈 Souscriptions après l'essai gratuit**
-   - ✅ Utilisation de `CASE WHEN` dans un `COUNT(DISTINCT customer_id)` pour calculer les clients ayant souscrit après leur essai gratuit.
-
-7. **📆 Répartition des abonnements au 31 décembre 2020**
-   - 📜 Utilisation de `ROW_NUMBER() OVER (PARTITION BY customer_id ORDER BY start_date DESC)` pour identifier l'abonnement actif à la date de référence et afficher sa distribution.
-
-## ⚙️ Complexité des Requêtes SQL
-Les requêtes SQL utilisées varient en complexité :
-- **Simples** : Requêtes avec `COUNT()`, `GROUP BY`, et `WHERE`.
-- **Moyennement complexes** : Utilisation de `JOIN` pour combiner plusieurs tables et obtenir des informations plus riches.
-- **Complexes** : Requêtes avec **CTE**, **fenêtrage (`RANK()` et `ROW_NUMBER()`)**, et **sous-requêtes** pour analyser les parcours clients de manière détaillée.
+**Problématique :**  
+Comment améliorer la conversion des utilisateurs après l’essai gratuit et réduire le taux de désabonnement (churn), tout en optimisant le parcours client dans une offre freemium ?
 
 
-## ▶️ Exécution des Requêtes
-Les requêtes SQL peuvent être exécutées sur n'importe quelle base de données contenant les tables suivantes :
-- **`subscriptions`** : Contient les abonnements des clients avec `customer_id`, `plan_id` et `start_date`. 📜
-- **`plans`** : Contient les différents types d'abonnements avec `plan_id` et `plan_name`. 📑
+##  Méthodologie
+
+Dans un contexte concurrentiel fort, les plateformes en ligne proposant des essais gratuits peinent souvent à **transformer ces utilisateurs en abonnés payants**.  
+
+Foodie-Fi, entreprise fictive de streaming culinaire, constate un **taux de churn précoce préoccupant**. L’objectif est d’analyser les comportements d’abonnement pour :
+- Mieux comprendre les **parcours d’usage**.
+- Identifier les **leviers de rétention**.
+- Structurer une stratégie de **fidélisation et de monétisation durable**.
+
+
+##  But du projet
+
+- Reconstituer les **parcours d’abonnement complets** de chaque client.
+- Identifier les **comportements menant au churn** (ex : churn post-trial).
+- Évaluer la **performance des différents plans tarifaires**.
+
+
+##  Processus d’analyse
+
+-  Nettoyage et modélisation des données en SQL (plans, dates, clients).
+- Classement des séquences clients à l’aide de fonctions analytiques SQL (`RANK`, `ROW_NUMBER`).
+- Création de KPIs : taux de conversion, churn, délai de souscription…
+- Segmentation des clients par **stade d’engagement** pour des actions marketing ciblées.
+- Mise en avant de plans à forte rétention (plan annuel pro) pour un **business model plus durable**.
+
+
+## Résultats obtenus
+
+- **19,4 %** des utilisateurs annulent après l’essai gratuit, sans tester de plan payant.
+- Les clients qui souscrivent un **plan annuel** sont les plus fidèles.
+- Le churn est particulièrement élevé chez les utilisateurs inactifs durant leur essai.
+- Recommandations clés :
+  - Proposer une **offre promotionnelle** à la fin de l’essai.
+  - Envoyer un **email de réassurance ciblé** avant la fin de la période d’essai..
+  - Détecter les signaux faibles d’un churn anticipé (peu d’interactions, essai trop court, etc.).
+
+
+## Intentions d’apprentissage
+
+Ce projet m’a permis de :
+
+- Approfondir la **modélisation temporelle** de parcours utilisateurs.
+- Travailler les fonctions analytiques SQL (`RANK`, `ROW_NUMBER`) pour créer des **séquences comportementales**.
+- Simuler des paiements en intégrant une **logique métier réaliste**.
+- Penser l'analyse sous l’angle de la **valeur client** et de la **durabilité du modèle économique**.
+- **Comprendre un business model SaaS**, ses enjeux de conversion et de rétention.
 
 
